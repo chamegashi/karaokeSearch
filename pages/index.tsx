@@ -14,11 +14,19 @@ const Home: VFC = () => {
   return (
     <div className="w-full text-center min-h-screen bg-gray-700 text-white">
       <Head>
-        <title >カラオケ検索</title>
+        <title >カラオケ</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <h1 className="text-3xl font-bold p-8">カラオケ検索</h1>
+
+      <div className="text-xl m-5">
+        <p>カラオケに曲が入っているかどうか検索できます。</p>
+      </div>
+
+      <div className="text-xl m-5">
+        <p>歌手名かタイトルを入れて検索してください。</p>
+      </div>
 
       <div className="border mx-6 rounded pt-2 pb-8">
         <div>
