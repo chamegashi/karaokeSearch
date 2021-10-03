@@ -5,8 +5,7 @@ import axios from 'axios'
 
 const Search: VFC = () => {
   const router = useRouter()
-  const [musicText, setMusicText] = useState<string>("")
-  const [artistText, setArtistText] = useState<string>("")
+  const [keyword, setKeyword] = useState<string>("")
 
   useEffect(() => {
     if (!router.query) {
@@ -14,35 +13,22 @@ const Search: VFC = () => {
     }
     const query = router.query;
 
-    if (query.music && typeof query.music === "string") {
-      setMusicText(query.music);
-    }
-    if (query.artist && typeof query.artist === "string") {
-      setArtistText(query.artist);
+    console.log(query)
+
+    if (query.keyword && typeof query.keyword === "string") {
+      setKeyword(query.keyword);
     }
 
-    const config = {
-      headers: {
-        Referer: "https://www.clubdam.com/karaokesearch/",
-      }
+  }, [])
+
+  useEffect(() => {
+    if(!keyword){
+      return
     }
 
-    axios.post(
-      'https://www.clubdam.com/dkwebsys/search-api/SearchVariousByKeywordApi',
-      {
-        authKey:"2/Qb9R@8s*",
-        compId:"1",
-        dispCount:"100",
-        keyword:"ホロネス",
-        modelTypeCode:"1",
-        pageNo:"1",
-        serialNo:"AT00001",
-        sort:"2",
-      },
-      config
-    )
+    axios.get('http://127.0.0.1:5000/api/search?keyword=' + keyword)
     .then(res => {
-      console.info(res.data)
+      console.log(res.data)
     })
     .catch((e) => {
       if (e.response !== undefined) {
@@ -50,7 +36,7 @@ const Search: VFC = () => {
       }
     })
 
-  }, [])
+  }, [keyword])
 
   return (
     <div className="w-full text-center min-h-screen bg-gray-700 text-white">
@@ -62,8 +48,7 @@ const Search: VFC = () => {
 
       <h1 className="text-3xl font-bold p-8">カラオケ検索結果</h1>
 
-      <p>{musicText}</p>
-      <p>{artistText}</p>
+      <p>{keyword}</p>
     </div>
   )
 }

@@ -4,15 +4,11 @@ import Link from "next/link";
 
 const Home: VFC = () => {
 
-  const [musicText, setMusicText] = useState<string>("")
-  const [artistText, setArtistText] = useState<string>("")
+  const [keyword, setKeyword] = useState<string>("")
 
   
   const changeMusicText = (e: FormEvent<HTMLInputElement>) => {
-    setMusicText(e.currentTarget.value);
-  };
-  const changeArtistText = (e: FormEvent<HTMLInputElement>) => {
-    setArtistText(e.currentTarget.value);
+    setKeyword(e.currentTarget.value);
   };
 
   return (
@@ -26,13 +22,8 @@ const Home: VFC = () => {
 
       <div className="border mx-6 rounded pt-2 pb-8">
         <div>
-          <p className="text-xl p-2">曲名</p>
-          <input className="rounded p-3 font-bold text-gray-700" type="text" value={musicText} placeholder="指定なし" onChange={changeMusicText}/>
-        </div>
-
-        <div className="mt-4">
-          <p className="text-xl p-2">アーティスト</p>
-          <input className="rounded p-3 font-bold text-gray-700" type="text" value={artistText} placeholder="指定なし" onChange={changeArtistText}/>
+          <p className="text-xl p-2">キーワード</p>
+          <input className="rounded p-3 font-bold text-gray-700" type="text" value={keyword} placeholder="歌手名 or タイトル" onChange={changeMusicText}/>
         </div>
       </div>
 
@@ -41,8 +32,7 @@ const Home: VFC = () => {
         href={{
           pathname: "/search",
           query: {
-            music: musicText,
-            artist: artistText,
+            keyword: keyword,
           },
         }}
       >
