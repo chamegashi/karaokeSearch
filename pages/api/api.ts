@@ -3,7 +3,7 @@ import axios from "axios";
 import { useCallback, useState } from "react";
 
 // const hostname = process.env.NEXT_PUBLIC_BASE_URI;
-const hostname = "http://127.0.0.1:5000";
+const hostname = "https://dry-lake-67755.herokuapp.com/";
 
 export type contentsResponse = {
   damResponce: content[];
