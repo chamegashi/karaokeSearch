@@ -15,7 +15,7 @@ export type content = {
   song: string
 }
 
-export const getContentsdata = () => {
+export const GetContentsData = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [response, setResponse] = useState<contentsResponse | null>(null);
   const [error, setError] = useState<Error | null>(null);

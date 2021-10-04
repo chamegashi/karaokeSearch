@@ -3,7 +3,7 @@ import { VFC, useEffect, useState } from 'react'
 import { useRouter } from "next/router";
 import Link from "next/link";
 
-import { getContentsdata } from './api/api'
+import { GetContentsData } from './api/api'
 import { SearchResultContent } from '../components/SearchResultContent'
 
 interface content {
@@ -18,7 +18,7 @@ const Search: VFC = () => {
   const [damContents, setDamContents] = useState<content[]>([])
   const [isJoy, setIsJoy] = useState<boolean>(true)
 
-  const { getFn, loading, error, response } = getContentsdata()
+  const { getFn, loading, error, response } = GetContentsData()
 
   useEffect(() => {
     if (!router.query) {
@@ -29,7 +29,7 @@ const Search: VFC = () => {
       setKeyword(query.keyword);
       getFn(query.keyword)
     }
-  }, [router.query])
+  }, [getFn, router.query])
 
   useEffect(() => {
     if(!response){
