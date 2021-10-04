@@ -65,7 +65,7 @@ const Search: VFC = () => {
 
       { loading && (
          <p className="text-3xl font-bold p-8">Loading...</p>
-      )}      
+      )}
 
       { isJoy && (
         <div>
@@ -104,6 +104,14 @@ const Search: VFC = () => {
 
         </div>
       )}
+
+      { !loading && isJoy && joyContents.length === 0 && (
+        <p className="text-3xl font-bold p-8">何もありませんでした。</p>
+      )}
+      { !loading && !isJoy && damContents.length === 0 && (
+        <p className="text-3xl font-bold p-8">何もありませんでした。</p>
+      )}
+
 
     </div>
   )

@@ -13,10 +13,10 @@ export const SearchResultContent: VFC<Props> = (props: Props) => {
   return (
     <div className="cursor-pointer my-1">
       <button className="bg-gray-600 h-16 w-11/12 mx-4 rounded flex justify-center" onClick={() => {setIsClicked(!isClicked)}}>
-        <div className="w-3/5 flex flex-wrap content-center text-left">
+        <div className="w-3/5 flex flex-wrap content-center text-left my-5">
           <p className="px-3 text-sm truncate">{props.song}</p>
         </div>
-        <div className="w-2/5 flex flex-wrap content-center text-left">
+        <div className="w-2/5 flex flex-wrap content-center text-left my-5">
           <p className="text-xs text-gray-400 truncate">{props.artist}</p>
         </div>
       </button>
