@@ -46,11 +46,13 @@ const Search: VFC = () => {
   }, [error])
 
   return (
-    <div className="w-full text-center min-h-screen bg-gray-700 text-white">
+    <div className="w-full text-center min-h-screen bg-gray-700 text-white pb-2">
 
       <Head>
-        <title >カラオケ検索結果</title>
-        <link rel="icon" href="/favicon.ico" />
+        <meta name="theme-color" content="#f9a8d4" />
+        <title>カラオケ検索結果</title>
+        <link rel="manifest" href="/manifest.webmanifest" />
+        <link rel="apple-touch-icon" href="/icon-192x192.png" />
       </Head>
 
       <h1 className="text-3xl font-bold p-8">カラオケ検索結果</h1>

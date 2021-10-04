@@ -14,10 +14,11 @@ const Home: VFC = () => {
   return (
     <div className="w-full text-center min-h-screen bg-gray-700 text-white">
       <Head>
-        <title >カラオケ</title>
-        <link rel="icon" href="/favicon.ico" />
+        <meta name="theme-color" content="#f9a8d4" />
+        <title>カラオケ検索</title>
+        <link rel="manifest" href="/manifest.webmanifest" />
+        <link rel="apple-touch-icon" href="/icon-192x192.png" />
       </Head>
-
       <h1 className="text-3xl font-bold p-8">カラオケ検索</h1>
 
       <div className="text-xl m-5">
