@@ -29,7 +29,7 @@ const Search: VFC = () => {
       setKeyword(query.keyword);
       getFn(query.keyword)
     }
-  }, [])
+  }, [router.query])
 
   useEffect(() => {
     if(!response){
@@ -61,6 +61,10 @@ const Search: VFC = () => {
         <button className="border p-2 mb-4 rounded">検索画面に戻る</button>
       </Link>
 
+      { loading && (
+         <p className="text-3xl font-bold p-8">Loading...</p>
+      )}      
+
       { isJoy && (
         <div>
           <nav className="flex justify-center sm:flex-row my-2">
@@ -73,7 +77,7 @@ const Search: VFC = () => {
 
           { joyContents.map((content, index) => {
             return(
-              <SearchResultContent key={index} artist={content.artist} song={content.song}/>
+              <SearchResultContent key={index} artist={content.artist} song={content.song} keyword={keyword}/>
             )
           })}
 
@@ -92,16 +96,12 @@ const Search: VFC = () => {
 
           { damContents.map((content, index) => {
             return(
-              <SearchResultContent key={index} artist={content.artist} song={content.song}/>
+              <SearchResultContent key={index} artist={content.artist} song={content.song} keyword={keyword}/>
             )
           })}
 
         </div>
       )}
-
-      { loading && (
-         <p className="text-3xl font-bold p-8">Loading...</p>
-      )}      
 
     </div>
   )
