@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import { VFC, useEffect, useState } from 'react'
+import { VFC, useEffect, useState, FormEvent } from 'react'
 import { useRouter } from "next/router";
 import Link from "next/link";
 
@@ -44,6 +44,10 @@ const Search: VFC = () => {
       console.log(error)
     }
   }, [error])
+
+  const changeKeyword = (e: FormEvent<HTMLInputElement>) => {
+    setKeyword(e.currentTarget.value);
+  };
 
   return (
     <div className="w-full text-center min-h-screen bg-gray-700 text-white pb-2">

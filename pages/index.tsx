@@ -3,11 +3,9 @@ import { VFC, useState, FormEvent } from 'react'
 import Link from "next/link";
 
 const Home: VFC = () => {
-
   const [keyword, setKeyword] = useState<string>("")
-
   
-  const changeMusicText = (e: FormEvent<HTMLInputElement>) => {
+  const changeKeyword = (e: FormEvent<HTMLInputElement>) => {
     setKeyword(e.currentTarget.value);
   };
 
@@ -21,18 +19,18 @@ const Home: VFC = () => {
       </Head>
       <h1 className="text-3xl font-bold p-8">カラオケ検索</h1>
 
-      <div className="text-xl m-5">
+      <div className="text-lg m-5">
         <p>カラオケに曲が入っているかどうか検索できます。</p>
       </div>
 
-      <div className="text-xl m-5">
-        <p>歌手名かタイトルを入れて検索してください。</p>
+      <div className="text-lg m-5">
+        <p>空白区切りで複数条件検索ができます。</p>
       </div>
 
       <div className="border mx-6 rounded pt-2 pb-8">
         <div>
           <p className="text-xl p-2">キーワード</p>
-          <input className="rounded p-3 font-bold text-gray-700" type="text" value={keyword} placeholder="歌手名 or タイトル" onChange={changeMusicText}/>
+          <input className="rounded p-3 font-bold text-gray-700" type="text" value={keyword} placeholder="歌手名 or タイトル" onChange={changeKeyword}/>
         </div>
       </div>
 
