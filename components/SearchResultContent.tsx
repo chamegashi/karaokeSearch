@@ -6,7 +6,6 @@ export type Model = "DAM" | "JOY";
 type Props = {
   artist: string;
   song: string;
-  keyword: string;
   model: Model;
   songId: string;
   favorites: Favorite[];

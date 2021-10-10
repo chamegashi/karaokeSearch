@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import { VFC, useState, FormEvent } from 'react'
 import Link from "next/link";
+import { HeartIcon } from '@heroicons/react/solid'
 
 const Home: VFC = () => {
   const [keyword, setKeyword] = useState<string>("")
@@ -17,7 +18,15 @@ const Home: VFC = () => {
         <link rel="manifest" href="/manifest.webmanifest" />
         <link rel="apple-touch-icon" href="/icon-192x192.png" />
       </Head>
-      <h1 className="text-3xl font-bold p-8">カラオケ検索</h1>
+
+      <div className="relative border-b border-gray-700 bg-gray-600 shadow-2xl py-4">
+        <h1 className="text-3xl font-bold">カラオケ検索</h1>
+        <Link href={{
+          pathname: "/favorite",
+        }}>
+          <HeartIcon className="w-10 absolute inset-y-0 right-0 m-3"/>
+        </Link>
+      </div>
 
       <div className="text-lg m-5">
         <p>カラオケに曲が入っているかどうか検索できます。</p>
