@@ -12,12 +12,20 @@ interface content {
   songId: string,
 }
 
+type Favorite = {
+  song: string,
+  artist: string,
+  songId: string,
+  model: string
+}
+
 const Search: VFC = () => {
   const router = useRouter()
   const [keyword, setKeyword] = useState<string>("")
   const [joyContents, setJoyContents] = useState<content[]>([])
   const [damContents, setDamContents] = useState<content[]>([])
   const [isJoy, setIsJoy] = useState<boolean>(true)
+  const [favorites, setFavorites] = useState<Favorite[]>([])
 
   const { getFn, loading, error, response } = GetContentsData()
 
@@ -36,7 +44,6 @@ const Search: VFC = () => {
     if(!response){
       return
     }
-    console.log(response)
     setJoyContents(response.joyResponce)
     setDamContents(response.damResponce)
   }, [response])
@@ -47,9 +54,28 @@ const Search: VFC = () => {
     }
   }, [error])
 
-  const changeKeyword = (e: FormEvent<HTMLInputElement>) => {
-    setKeyword(e.currentTarget.value);
-  };
+  useEffect(() => {
+    const favorites = JSON.parse(localStorage.getItem("favorite"));
+    setFavorites(favorites);
+  }, [])
+
+  const addFavorit = (favorite: Favorite) => {
+    let newFavorites: Favorite[] = []
+    const favorites = JSON.parse(localStorage.getItem("favorite"));
+
+    if(favorites){
+      newFavorites = favorites
+    }
+
+    newFavorites.push({"song": favorite.song, "artist": favorite.artist, "songId": favorite.songId, "model": favorite.model})
+    localStorage.setItem('favorite', JSON.stringify(newFavorites));
+  }
+
+  const deleteFavorit = (songId: string) => {
+    const favorites = JSON.parse(localStorage.getItem("favorite"));
+    const newFavorites = favorites.filter((favorite) => {return favorite.songId !== songId})
+    localStorage.setItem('favorite', JSON.stringify(newFavorites));
+  }
 
   return (
     <div className="w-full text-center min-h-screen bg-gray-700 text-white pb-2">
@@ -85,7 +111,16 @@ const Search: VFC = () => {
 
           { joyContents.map((content, index) => {
             return(
-              <SearchResultContent key={index} artist={content.artist} song={content.song} keyword={keyword} model={"JOY"} songId={content.songId}/>
+              <SearchResultContent
+                key={index}
+                artist={content.artist}
+                song={content.song}
+                keyword={keyword}
+                model={"JOY"}
+                songId={content.songId}
+                favorites={favorites}
+                addFavorite={addFavorit}
+                deleteFavorite={deleteFavorit}/>
             )
           })}
 
@@ -104,7 +139,15 @@ const Search: VFC = () => {
 
           { damContents.map((content, index) => {
             return(
-              <SearchResultContent key={index} artist={content.artist} song={content.song} keyword={keyword} model={"DAM"} songId={content.songId}/>
+              <SearchResultContent
+                key={index} artist={content.artist}
+                song={content.song}
+                keyword={keyword}
+                model={"DAM"}
+                songId={content.songId}
+                favorites={favorites}
+                addFavorite={addFavorit}
+                deleteFavorite={deleteFavorit}/>
             )
           })}
 
