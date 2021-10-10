@@ -12,7 +12,8 @@ export type contentsResponse = {
 
 export type content = {
   artist: string,
-  song: string
+  song: string,
+  songId: string,
 }
 
 export const GetContentsData = () => {

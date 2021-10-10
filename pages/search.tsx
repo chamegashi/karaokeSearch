@@ -8,7 +8,8 @@ import { SearchResultContent } from '../components/SearchResultContent'
 
 interface content {
   artist: string,
-  song: string
+  song: string,
+  songId: string,
 }
 
 const Search: VFC = () => {
@@ -35,6 +36,7 @@ const Search: VFC = () => {
     if(!response){
       return
     }
+    console.log(response)
     setJoyContents(response.joyResponce)
     setDamContents(response.damResponce)
   }, [response])
@@ -83,7 +85,7 @@ const Search: VFC = () => {
 
           { joyContents.map((content, index) => {
             return(
-              <SearchResultContent key={index} artist={content.artist} song={content.song} keyword={keyword}/>
+              <SearchResultContent key={index} artist={content.artist} song={content.song} keyword={keyword} model={"JOY"} songId={content.songId}/>
             )
           })}
 
@@ -102,7 +104,7 @@ const Search: VFC = () => {
 
           { damContents.map((content, index) => {
             return(
-              <SearchResultContent key={index} artist={content.artist} song={content.song} keyword={keyword}/>
+              <SearchResultContent key={index} artist={content.artist} song={content.song} keyword={keyword} model={"DAM"} songId={content.songId}/>
             )
           })}
 
