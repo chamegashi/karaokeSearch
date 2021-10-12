@@ -1,14 +1,35 @@
 import Head from 'next/head'
-import { VFC, useState, FormEvent } from 'react'
+import { VFC, useState, FormEvent, useEffect } from 'react'
 import Link from "next/link";
 import { HeartIcon } from '@heroicons/react/solid'
 
 const Home: VFC = () => {
   const [keyword, setKeyword] = useState<string>("")
+  const [history, setHistory] = useState<string[]>([])
   
+  useEffect(() => {
+    let newHistory = []
+    const history = JSON.parse(localStorage.getItem("history"))
+
+    if(history) newHistory = history
+    setHistory(history)
+  }, [])
+
   const changeKeyword = (e: FormEvent<HTMLInputElement>) => {
     setKeyword(e.currentTarget.value);
   };
+
+  const saveSerachHistory = (keyword: string) => {
+    let newHistory: string[] = []
+    const hisotory = JSON.parse(localStorage.getItem("history"));
+
+    if(hisotory) newHistory = hisotory
+
+    newHistory.push(keyword)
+    localStorage.setItem('favorite', JSON.stringify(newHistory));
+    console.log(history)
+  }
+
 
   return (
     <div className="w-full text-center min-h-screen bg-gray-700 text-white">
@@ -52,8 +73,10 @@ const Home: VFC = () => {
           },
         }}
       >
-        <button className="mt-7 bg-blue-600 hover:bg-blue-700 text-white text-xl font-bold py-3 px-6 rounded">検索！</button>
+        <button onClick={() => {saveSerachHistory(keyword)}} className="mt-7 bg-blue-600 hover:bg-blue-700 text-white text-xl font-bold py-3 px-6 rounded">検索！</button>
       </Link>
+
+      <p>検索履歴</p>
 
     </div>
   )

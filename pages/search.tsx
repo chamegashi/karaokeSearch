@@ -57,6 +57,9 @@ const Search: VFC = () => {
 
   useEffect(() => {
     const favorites = JSON.parse(localStorage.getItem("favorite"));
+    if(!favorites){
+      return
+    }
     setFavorites(favorites);
   }, [])
 
@@ -64,9 +67,7 @@ const Search: VFC = () => {
     let newFavorites: Favorite[] = []
     const favorites = JSON.parse(localStorage.getItem("favorite"));
 
-    if(favorites){
-      newFavorites = favorites
-    }
+    if(favorites) newFavorites = favorites
 
     newFavorites.push({"song": favorite.song, "artist": favorite.artist, "songId": favorite.songId, "model": favorite.model})
     localStorage.setItem('favorite', JSON.stringify(newFavorites));
