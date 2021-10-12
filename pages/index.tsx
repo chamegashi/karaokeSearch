@@ -26,7 +26,7 @@ const Home: VFC = () => {
     if(hisotory) newHistory = hisotory
 
     newHistory.push(keyword)
-    localStorage.setItem('favorite', JSON.stringify(newHistory));
+    localStorage.setItem('history', JSON.stringify(newHistory));
     console.log(history)
   }
 
@@ -76,7 +76,27 @@ const Home: VFC = () => {
         <button onClick={() => {saveSerachHistory(keyword)}} className="mt-7 bg-blue-600 hover:bg-blue-700 text-white text-xl font-bold py-3 px-6 rounded">検索！</button>
       </Link>
 
-      <p>検索履歴</p>
+      <h1 className="text-2xl font-bold mt-6">検索履歴</h1>
+
+      { history.length && (
+        <div className="m-2">
+          { history.map((historyString, i) => {return (
+            <Link
+              href={{
+                pathname: "/search",
+                query: {
+                  keyword: historyString,
+                },
+              }}
+              key={i}
+            >
+              <div className="h-10 bg-gray-600 rounded w-full my-2 flex justify-center">
+                <p className="text-lg pt-1">{historyString}</p>
+              </div>
+            </Link>
+          )})}
+        </div>
+      ) }
 
     </div>
   )
