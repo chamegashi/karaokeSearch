@@ -25,7 +25,7 @@ const Home: VFC = () => {
 
     if(localHistory) newHistory = localHistory
 
-    newHistory.push(keyword)
+    newHistory.unshift(keyword)
 
     if(newHistory.length > 5){
       newHistory.pop()
@@ -82,7 +82,7 @@ const Home: VFC = () => {
 
       <h1 className="text-2xl font-bold mt-6">検索履歴</h1>
 
-      { history.length && (
+      { (history.length !== 0) && (
         <div className="m-2">
           { history.map((historyString, i) => {return (
             <Link
