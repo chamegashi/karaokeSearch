@@ -22,6 +22,8 @@ type Favorite = {
 export const SearchResultContent: VFC<Props> = (props: Props) => {
   const [isClicked, setIsClicked] = useState<boolean>(false)
   const [isFavorited, setIsFavorited] = useState<boolean>(false)
+  const [mainBlockClass, setMainblockClass] = useState<string>("")
+  const [artistClass, setArtistClass] = useState<string>("")
 
   useEffect(() => {
     const filtered = props.favorites.filter((favorite) => {return favorite.songId === props.songId})
@@ -29,6 +31,16 @@ export const SearchResultContent: VFC<Props> = (props: Props) => {
       setIsFavorited(true)
     }
   }, [props.favorites, props.songId])
+
+  useEffect(() => {
+    if(isFavorited){
+      setMainblockClass("bg-yellow-600 h-16 w-11/12 mx-4 rounded flex justify-center")
+      setArtistClass("text-xs text-white truncate")
+    } else {
+      setMainblockClass("bg-gray-600 h-16 w-11/12 mx-4 rounded flex justify-center")
+      setArtistClass("text-xs text-gray-400 truncate")
+    }
+  }, [isFavorited])
 
   const sendFavoriteData: Favorite = {
     song: props.song,
@@ -39,12 +51,12 @@ export const SearchResultContent: VFC<Props> = (props: Props) => {
 
   return (
     <div className="cursor-pointer my-1">
-      <button className="bg-gray-600 h-16 w-11/12 mx-4 rounded flex justify-center" onClick={() => {setIsClicked(!isClicked)}}>
+      <button className={mainBlockClass} onClick={() => {setIsClicked(!isClicked)}}>
         <div className="w-3/5 flex flex-wrap content-center text-left my-5">
           <p className="px-3 text-sm truncate">{props.song}</p>
         </div>
         <div className="w-2/5 flex flex-wrap content-center text-left my-5">
-          <p className="text-xs text-gray-400 truncate">{props.artist}</p>
+          <p className={artistClass}>{props.artist}</p>
         </div>
       </button>
 
