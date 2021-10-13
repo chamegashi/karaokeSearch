@@ -26,8 +26,12 @@ const Home: VFC = () => {
     if(hisotory) newHistory = hisotory
 
     newHistory.push(keyword)
+
+    if(newHistory.length > 5){
+      newHistory.pop()
+    }
+
     localStorage.setItem('history', JSON.stringify(newHistory));
-    console.log(history)
   }
 
 
