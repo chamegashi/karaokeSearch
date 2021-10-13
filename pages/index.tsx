@@ -12,7 +12,7 @@ const Home: VFC = () => {
     const history = JSON.parse(localStorage.getItem("history"))
 
     if(history) newHistory = history
-    setHistory(history)
+    setHistory(newHistory)
   }, [])
 
   const changeKeyword = (e: FormEvent<HTMLInputElement>) => {
@@ -21,9 +21,9 @@ const Home: VFC = () => {
 
   const saveSerachHistory = (keyword: string) => {
     let newHistory: string[] = []
-    const hisotory = JSON.parse(localStorage.getItem("history"));
+    const localHistory = JSON.parse(localStorage.getItem("history"));
 
-    if(hisotory) newHistory = hisotory
+    if(localHistory) newHistory = localHistory
 
     newHistory.push(keyword)
 
