@@ -62,17 +62,9 @@ export const SearchResultContent: VFC<Props> = (props: Props) => {
 
       {isClicked && (
         <div className="bg-gray-600 h-12 w-11/12 mx-4 mb-1 rounded-b border-t border-gray-800 flex text-gray-200 text-sm">
-          {props.model === "JOY" && (
-            <a href={"https://www.joysound.com/web/search/song/" + props.songId} className="w-1/2 rounded border m-1 bg-gray-700 flex justify-center">
-              <button className="">{props.model}のページに飛ぶ</button>
-            </a>
-          )}
-          {props.model === "DAM" && (
-            <a href={"https://www.clubdam.com/karaokesearch/songleaf.html?requestNo=" + props.songId} className="w-1/2 rounded border m-1 bg-gray-700 flex justify-center">
-              <button className="">{props.model}のページに飛ぶ</button>
-            </a>
-          )}
-
+          <a href={"https://keytube.net/search/?word=" + props.song + "+" + props.artist} className="w-1/2 rounded border m-1 bg-gray-700 flex justify-center">
+            <button className="">音域を調べる</button>
+          </a>
           {!isFavorited && (
             <button className="w-1/2 rounded border m-1 bg-gray-700" onClick={() => {props.addFavorite(sendFavoriteData);setIsFavorited(true)}}>お気に入りに登録</button>
           )}
