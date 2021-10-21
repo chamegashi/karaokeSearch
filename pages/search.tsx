@@ -3,6 +3,7 @@ import { VFC, useEffect, useState } from 'react'
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { HeartIcon } from '@heroicons/react/solid'
+import BeatLoader from "react-spinners/BeatLoader";
 
 import { GetContentsData } from './api/api'
 import { SearchResultContent } from '../components/SearchResultContent'
@@ -104,9 +105,6 @@ const Search: VFC = () => {
         <button className="border p-2 mb-4 rounded mt-4">検索画面に戻る</button>
       </Link>
 
-      { loading && (
-         <p className="text-3xl font-bold p-8">Loading...</p>
-      )}
 
       { isJoy && (
         <div>
@@ -160,6 +158,13 @@ const Search: VFC = () => {
 
         </div>
       )}
+
+      { loading && (
+        <div className="flex justify-center content-center mt-10">
+          <BeatLoader size={15} color={"#ffffff"} margin={2}></BeatLoader>
+        </div>
+      )}
+
 
       { !loading && isJoy && joyContents.length === 0 && (
         <p className="text-3xl font-bold p-8">何もありませんでした。</p>
